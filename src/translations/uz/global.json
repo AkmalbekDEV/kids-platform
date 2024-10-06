@@ -1,0 +1,48 @@
+{
+    "header": {
+        "logOut": "Chiqish",
+        "changeLang": "Tilni o'zgartirish"
+    },
+    "main": {
+        "bannerTitle": "Hush kelibsiz",
+        "bannerDesc": "Siz bilan yana bir bor ko'rishib turganimizdan xursandmiz!",
+        "title": "Ma'lumotlar",
+        "truePaymentStatus": "To'langan",
+        "falsePaymentStatus": "To'lanmagan",
+        "truePaymentDesc": "Siz kursning pulini to'laganligingiz sababli, bu platforma qulayliklaridan to'liq foydalana olasiz!",
+        "falsePaymentDesc": "Siz kursning pulini to'lamaganligingiz sababli, bu platforma qulayliklaridan foydalana olmaysiz!",
+        "results": "Natijalar",
+        "resultsDesc": "Bu joyga bosish orqali siz o'zingiz haqingizdagi natijalarni bilib olishingiz mumkin",
+        "tests": "Testlar",
+        "testsDesc": "Bu joyga bosish orqali siz har xil turdagi testlarni yechishingiz va natijangizni ko'rishingiz mumkin"
+    },
+    "sidebar": {
+        "link1": "Asosiy",
+        "link2": "Kitoblar",
+        "link3": "Testlar",
+        "link4": "Natijalar"
+    },
+    "books": {
+        "title": "Kitoblar",
+        "desc": "Bu yerda siz o'z-o'zingizni bilim darajanizni oshirishga yordam beradigan kitoblarni uchratishingiz mumkin"
+    },
+    "tests": {
+        "emptyTests": "Hozircha testlar mavjud emas :)",
+        "title": "Mavjud testlar",
+        "lengthQuestion": "Savollar soni",
+        "startTest": "Testni boshlash",
+        "question": "Savol",
+        "finish": "Tugatish",
+        "exit": "Chiqish",
+        "yourResult": "Sizning ballingiz"
+    },
+    "results": {
+        "title": "Test natijalari",
+        "desc": "Hech qanday test natijalari yo'q.",
+        "testLink": "Test ishlash",
+        "score": "Ball",
+        "totalQuestions": "Jami savollar",
+        "date": "Sana",
+        "delete": "O'chirish"
+    }
+}
