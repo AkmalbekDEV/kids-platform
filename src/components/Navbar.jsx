@@ -171,19 +171,16 @@ const Navbar = () => {
           <DrawerHeader color={theme === 'dark' ? 'white' : 'black'}>Menyu</DrawerHeader>
           <DrawerBody>
             <div onClick={() => navigate('/')} className='flex items-center justify-center py-5 text-xl font-medium cursor-pointer transition-all gap-5 rounded-xl hover:bg-[#F0F7FF] dark:hover:bg-[#2C2A3B] dark:text-white'>
-              Asosiy
+              {t("sidebar.link1")}
             </div>
             <div onClick={handleBooks} className='flex items-center justify-center py-5 text-xl font-medium cursor-pointer transition-all gap-5 rounded-xl hover:bg-[#F0F7FF] dark:hover:bg-[#2C2A3B] dark:text-white'>
-              Kitoblar
+              {t("sidebar.link2")}
             </div>
-            {/* <div onClick={handleMovies} className='flex items-center justify-center py-5 text-xl font-medium cursor-pointer transition-all gap-5 rounded-xl hover:bg-[#F0F7FF] dark:hover:bg-[#2C2A3B] dark:text-white'>
-              Kinolar
-            </div> */}
             <div onClick={handleTests} className='flex items-center justify-center py-5 text-xl font-medium cursor-pointer transition-all gap-5 rounded-xl hover:bg-[#F0F7FF] dark:hover:bg-[#2C2A3B] dark:text-white'>
-              Testlar
+              {t("sidebar.link3")}
             </div>
             <div onClick={handleResults} className='flex items-center justify-center py-5 text-xl font-medium cursor-pointer transition-all gap-5 rounded-xl hover:bg-[#F0F7FF] dark:hover:bg-[#2C2A3B] dark:text-white mb-5'>
-              Natijalar
+              {t("sidebar.link4")}
             </div>
           </DrawerBody>
         </DrawerContent>
