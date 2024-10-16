@@ -1,5 +1,5 @@
 import axios from 'axios'
-import React, { useContext, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { AuthContext } from '../context/AuthContext'
 import Logo from '../assets/logo.png'
@@ -73,6 +73,17 @@ const Login = () => {
     navigate('/')
   }
 
+  useEffect(() => {
+    toast({
+      duration: 4000,
+      position: 'top',
+      status: 'info',
+      title: `Sizga taqdim etilgan login va parolni kiriting
+      (Введите логин и пароль, предоставленные вам).
+      `,
+    })
+  }, []);
+
   return (
     <div className='w-full h-screen flex items-center max-sm:flex-col max-sm:pt-10'>
       <div className='w-[50%] max-sm:w-full max-sm:px-10 h-screen flex items-center justify-center'>
@@ -85,7 +96,6 @@ const Login = () => {
           <div className='flex justify-center'>
             <button className='bg-gradient-to-r from-violet-600 to-indigo-600 rounded-[15px] px-10 py-3 mt-5 text-white transition-all hover:shadow-md hover:shadow-violet-500 active:bg-violet-800'>Kirish!</button>
           </div>
-          <h1 className='text-sm mt-5 text-center text-violet-600'>Akkauntingiz yo'qmi? <a className='hover:underline' href="/register">Bepul yarating!</a></h1>
         </form>
       </div>
       <div className='w-[50%] max-sm:w-full max-sm:rounded-l-none max-sm:rounded-t-full max-sm:mt-10 h-screen flex items-center justify-center bg-gradient-to-r from-violet-600 to-indigo-600 rounded-l-full'>

@@ -1,7 +1,7 @@
 import React from 'react'
 import Login from '../Auth/Login'
 import { Route, Routes } from 'react-router-dom'
-import Register from '../Auth/Register'
+// import Register from '../Auth/Register'
 
 const PublicRoutes = () => {
   return (
@@ -9,7 +9,7 @@ const PublicRoutes = () => {
         <Routes>
             <Route path='/' element={<Login />} />
             <Route path='/login' element={<Login />} />
-            <Route path='/register' element={<Register />} />
+            <Route path='/register' element={<Login />} />
         </Routes>
     </div>
   )

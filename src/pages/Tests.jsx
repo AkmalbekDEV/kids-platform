@@ -16,6 +16,10 @@ const TestShowPage = () => {
   const [showConfetti, setShowConfetti] = useState(false);
   const [congratulationsMessage, setCongratulationsMessage] = useState('');
   const [messageColor, setMessageColor] = useState('');
+  const [data, setData] = useState(null)
+  const userInfo = localStorage.getItem('user-info');
+  const parsedUserInfo = JSON.parse(userInfo)
+  const userId = parsedUserInfo.id;
   const [t] = useTranslation("global")
 
   useEffect(() => {
@@ -28,7 +32,17 @@ const TestShowPage = () => {
       }
     };
 
+    const getData = async () => {
+      try {
+        const response = await axios.get(`https://7b763fe74e4b87ba.mokky.dev/users/${userId}`)
+        setData(response.data)
+      } catch (error) {
+        console.log(error);
+      }
+    }
+
     fetchTests();
+    getData();
   }, []);
 
   const openModal = (test) => {
@@ -82,15 +96,25 @@ const TestShowPage = () => {
     }
   };
 
-  const saveTestResult = (testName, score, totalQuestions) => {
-    const currentResults = JSON.parse(localStorage.getItem('testResults')) || [];
+  const saveTestResult = async (testName, score, totalQuestions) => {
+    if (!data) return;
+  
     const newResult = {
       testName,
       score,
       totalQuestions,
       date: new Date().toLocaleString(),
     };
-    localStorage.setItem('testResults', JSON.stringify([...currentResults, newResult]));
+  
+    const updatedResults = [...data.results, newResult];
+  
+    try {
+      // POST so'rovini yuborish
+      await axios.patch(`https://7b763fe74e4b87ba.mokky.dev/users/${data.id}`, { results: updatedResults });
+      setData({ ...data, results: updatedResults }); // Yangi natijalarni yangilang
+    } catch (error) {
+      console.error('Xatolik yuz berdi:', error.response ? error.response.data : error.message);
+    }
   };
 
   if (tests.length === 0) {

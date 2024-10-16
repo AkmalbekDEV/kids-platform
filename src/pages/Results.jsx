@@ -1,19 +1,47 @@
+import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 const ResultsPage = () => {
   const [results, setResults] = useState([]);
   const [t] = useTranslation("global")
+  const [data, setData] = useState(null)
+  const userInfo = localStorage.getItem('user-info');
+  const parsedUserInfo = JSON.parse(userInfo)
+  const userId = parsedUserInfo.id;
 
   useEffect(() => {
-    const storedResults = JSON.parse(localStorage.getItem('testResults')) || [];
-    setResults(storedResults);
+    const getData = async () => {
+      try {
+        const response = await axios.get(`https://7b763fe74e4b87ba.mokky.dev/users/${userId}`)
+        setData(response.data)
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    getData();
   }, []);
 
-  const handleDelete = (index) => {
-    const updatedResults = results.filter((_, i) => i !== index);
-    setResults(updatedResults);
-    localStorage.setItem('testResults', JSON.stringify(updatedResults));
+  const deleteResult = async (id) => {
+    if (!data) return; // Agar obyekt hali yuklanmagan bo'lsa, hech narsa qilmaymiz
+
+    // Obyektdagi results arraydan o'chirish
+    const updatedResults = data.results.filter(result => result.id !== id);
+    
+    const updatedData = {
+      ...data,
+      results: updatedResults
+    };
+
+    try {
+      // Yangilangan obyektni API'ga PUT so'rovi orqali yuborish
+      await axios.patch(`https://7b763fe74e4b87ba.mokky.dev/users/${data.id}`, updatedData);
+
+      // Agar so'rov muvaffaqiyatli bo'lsa, lokal state'ni yangilaymiz
+      setData(updatedData);
+    } catch (error) {
+      console.error('Xatolik yuz berdi:', error);
+    }
   };
 
   return (
@@ -22,9 +50,9 @@ const ResultsPage = () => {
         {t("results.title")}
       </h1>
 
-      {results.length > 0 ? (
+      {data && data.results.length > 0 ? (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {results.map((result, index) => (
+          {data && data.results.map((result, index) => (
             <div
               key={index}
               className="bg-white dark:bg-[#1F1D2B] shadow-md rounded-lg p-4 hover:shadow-lg transition-shadow duration-300"
@@ -42,7 +70,7 @@ const ResultsPage = () => {
                 <strong>{t("results.date")}:</strong> {result.date}
               </p>
               <button
-                onClick={() => handleDelete(index)}
+                onClick={() => deleteResult()}
                 className="mt-4 bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600 transition-colors duration-200"
               >
                 {t("results.delete")}
